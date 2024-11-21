@@ -1,57 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artists</title>
+    <title>Groupie Tracker</title>
+
     <style>
         /* Reset some default styling */
-        body, h1, h2, ul, li {
+        body,
+        h1,
+        h2,
+        ul,
+        li {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         /* Set basic styling for the body */
+        :root {
+    --bg-color: #1A1A1A; 
+    --primary-color: #500B70; 
+    --secondary-color: #9232A9;
+    --accent-color: #AA66D9; 
+    --text-color: #FFFFFF; 
+}
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
+            background-image: url(images/milad-fakurian-ZKUn4ixspsk-unsplash.jpg);
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            margin-left: 70px;
+            /* color: #333; */
         }
 
         /* Style the header */
         header {
-            background: #333;
-            color: #fff;
             padding: 1rem 0;
-            text-align: center;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+            margin-top: 10px;
+           
+
         }
 
-        header h1 {
-            margin-bottom: 0.5rem;
+     header h1 {
+     font-size: 60px; /* Make the heading big */
+     position: relative;
+    color: var(--text-color);
+      margin-top: 10px; 
+      margin-bottom: 20px;
+      text-align:start; 
         }
 
-        /* Style the navigation bar */
+ header h1::before {
+    content: "List Of Artists"; /* Duplicate the text */ /* Position it absolutely */
+    position: absolute;
+    font-size: 57px;
+    left: 5px; /* Horizontal offset for shadow effect */
+    bottom:10px; /* Vertical offset for shadow effect */
+    color: var(--accent-color);
+    opacity: 0.4;
+    z-index: -1; /* Send it behind the original text */
+}
+
+.navbar {
+            padding: 20px;
+            margin: 30px;
+        }
+
         .navbar ul {
-            list-style: none;
-            padding: 0;
+            list-style-type: none; /* Remove bullet points */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+            padding: 0; /* Remove default padding */
+            margin: 0; /* Remove default margin */
         }
 
         .navbar li {
-            display: inline;
-            margin: 0 1rem;
+          margin-left: 20px;
         }
 
         .navbar a {
-            color: #fff;
-            text-decoration: none;
+            display: inline-block; /* Make the link behave like a block element */
+            font-size: 17px;
+            color: white; /* Text color */
+            text-decoration: none; /* Remove underline from links */
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition for shadow and scale */
         }
+        .navbar a::after {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute; /* Position it absolutely */
+    left: 0; /* Align to the left */
+    bottom: -5px; /* Position just below the link */
+    width: 100%; /* Full width of the link */
+    height: 2px; /* Height of the underline */
+    background-color: transparent; /* Start with transparent background */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for background color and scaling effect */
+}
 
-        .navbar a:hover {
-            text-decoration: underline;
-        }
+.navbar a:hover {
+    transform: translateY(-2px); /* Slightly lift the button on hover */
+}
 
+.navbar a:hover::after {
+    background-color: var(--accent-color); /* Change to purple on hover */
+}
         /* Style the main section */
         main {
             padding: 1rem;
@@ -60,20 +122,18 @@
         /* Style the search form */
         .search-container {
             text-align: center;
-            margin-bottom: 1.5rem;
         }
 
         .search-container form {
             display: inline-block;
-            background: #fff;
-            padding: 0.5rem;
+            padding: 10px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: none;
         }
 
         .search-container input[type="text"] {
             padding: 0.5rem;
-            border: 1px solid #ccc;
+            border: 1px solid #2A205E;
             border-radius: 5px;
             margin-right: 0.5rem;
         }
@@ -81,14 +141,14 @@
         .search-container input[type="submit"] {
             padding: 0.5rem 1rem;
             border: none;
-            background: #333;
+            background: #5665F7;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
         }
 
         .search-container input[type="submit"]:hover {
-            background: #555;
+            background: #8A1CDC;
         }
 
         /* Style the artists section */
@@ -106,11 +166,19 @@
         }
 
         .artist {
-            background: #fff;
+            background: #d5a6fa;
+            color: #fff;
             padding: 1rem;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect for artist */
+        .artist-link:hover .artist {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .artist img {
@@ -121,32 +189,79 @@
         .artist h2 {
             margin: 1rem 0;
         }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .artist-link {
+                width: calc(33.33% - 1rem);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .artist-link {
+                width: calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .artist-link {
+                width: calc(100% - 1rem);
+            }
+        }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>List of Artists</h1>
-        <!-- Navigation bar -->
         <nav class="navbar">
             <ul>
+                <li><a href="/dates">About</a></li>
                 <li><a href="/dates">Dates</a></li>
                 <li><a href="/locations">Locations</a></li>
+                <div class="search-container">
+                    <form action="/search" method="GET">
+                        <input type="text" name="query" placeholder="Search...">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
             </ul>
         </nav>
-    </header>
+        <header>
+            <h1>List of Artists</h1>
+            <!-- Navigation bar -->
+        </header>
     <main>
-        <!-- Search form -->
-        <div class="search-container">
-            <form action="/search" method="GET">
-                <input type="text" name="query" placeholder="Search for artists...">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-        
         <section id="artists">
             {{range .}}
             <a href="/artist/{{.ID}}" class="artist-link">
                 <div class="artist">
+                    <script>
+                        const artistBox = document.querySelector('.artist');
+
+                        // Function to handle mouse movement
+                        function handleMouseMove(event) {
+                            const boxRect = artistBox.getBoundingClientRect();
+                            const boxCenterX = boxRect.left + boxRect.width / 2;
+                            const boxCenterY = boxRect.top + boxRect.height / 2;
+
+                            // Calculate angle for Y-axis rotation
+                            const angleY = (event.clientX - boxCenterX) / boxRect.width * 20; // Increased tilt on Y axis
+
+                            // Calculate Z-axis movement based on distance from center
+                            const distanceFromCenter = Math.sqrt(Math.pow(event.clientX - boxCenterX, 2) + Math.pow(event.clientY - boxCenterY, 2));
+                            const zMovement = Math.min(50, distanceFromCenter / 5); // Increased max Z movement
+
+                            // Apply rotation and translation to create a 3D effect while keeping it upright
+                            artistBox.style.transform = `rotateY(${angleY}deg) translateZ(${zMovement}px)`;
+                        }
+
+                        // Add event listeners only when mouse is over the artistBox
+                        artistBox.addEventListener('mousemove', handleMouseMove);
+
+                        // Reset transform when mouse leaves the element
+                        artistBox.addEventListener('mouseleave', () => {
+                            artistBox.style.transform = 'rotateY(0deg) translateZ(0px)';
+                        });
+                    </script>
                     <h2>{{.Name}}</h2>
                     <img src="{{.Image}}" alt="{{.Name}}">
                 </div>
@@ -155,4 +270,5 @@
         </section>
     </main>
 </body>
+
 </html>
