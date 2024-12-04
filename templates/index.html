@@ -82,7 +82,15 @@
             font-weight: 700;
             color: var(--text-color);
         }
-
+        .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 1001;
+    }
         .navbar ul {
             list-style-type: none;
             display: flex;
@@ -117,6 +125,32 @@
         .navbar a:hover::after {
             transform: scaleX(1);
         }
+
+
+/* Hide the dropdown by default */
+.navbar .dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(26, 26, 26, 0.9);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar .dropdown a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Display dropdown menu on toggle */
+.navbar.active .dropdown {
+    display: flex;
+}
 
         .hero {
             text-align: center;
@@ -258,13 +292,13 @@ footer.container {
     align-items: center; /* Center items vertically */
 }
 
-.logo1 {
+.logo {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.styled-image1 {
+.styled-image {
     width: 50px;  
     border-radius: 30%; 
     object-fit: cover;
@@ -336,11 +370,30 @@ footer.container {
                 gap: 1rem;
             }
 
-            .navbar ul {
-                flex-direction: column;
-                align-items: center;
-            }
+            .hamburger {
+            display: block;
+        }
 
+        .navbar {
+            display: none; /* Initially hide the navbar */
+            flex-direction: column;
+            background-color: var(--bg-color);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar.active {
+            display: flex; /* Show navbar when active */
+        }
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -390,6 +443,9 @@ footer.container {
                 <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
                 <span>Groupie Tracker</span>
             </div>
+            <button class="hamburger" aria-label="Toggle navigation">
+                ☰
+            </button>
             <nav class="navbar">
                 <ul>
                     <li><a href="/Home">Home</a></li>
@@ -427,8 +483,8 @@ footer.container {
     </main>
     <footer>
         <div class="container">
-            <div class="logo1">
-                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image1">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
                 <span>Groupie Tracker</span>
             </div>
             <nav class="footer-links">
@@ -444,7 +500,7 @@ footer.container {
             <a href="https://github.com/nyagooh" target="_blank" rel="noopener noreferrer">
                 <img src="path/to/github-icon.png" alt="GitHub" />
             </a>
-            <a href="https://www.linkedin.com/in/maina-anne-37797820b/" target="_blank" rel="noopener noreferrer">
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
                 <img src="path/to/linkedin-icon.png" alt="LinkedIn" />
             </a>
         </div>
@@ -457,6 +513,12 @@ footer.container {
     </footer>
     
     <script>
+        const menuToggle = document.querySelector('.hamburger');
+    const navbar = document.querySelector('.navbar');
+
+    menuToggle.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+    });
         document.querySelectorAll('.artist').forEach(artist => {
             artist.addEventListener('mousemove', (e) => {
                 const { left, top, width, height } = artist.getBoundingClientRect();
