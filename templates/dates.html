@@ -196,24 +196,27 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-.artist-list {
+
+
+        .artist-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows wrapping of the artist cards */
     gap: 2rem;
     padding: 2rem;
+    max-height: 80vh; /* Limit the height to 80% of the viewport */
+    overflow-y: auto; /* Make it scrollable vertically */
 }
 
 .artist {
-    flex: 1 1 calc(33.33% - 1rem);
     background-color: var(--primary-color);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px var(--accent-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    overflow: hidden; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
     color: var(--text-color);
+    flex: 1 1 calc(33.33% - 1rem); /* Keep the existing layout size */
 }
-
 
 .artist:hover {
     transform: translateY(-10px);
