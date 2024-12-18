@@ -6,91 +6,127 @@
     <title>{{.Name}} - Artist Details</title>
     <style>
         /* Reset some default styling */
-        body, h1, h2, p, table, th, td, img {
+        body, h1, h2, p, img, ul, li {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #1A1A1A;
+            --primary-color: #2A1B3D;
+            --secondary-color: #9232A9;
+            --accent-color: #8A4FFF;
+            --text-color: #FFFFFF;
         }
 
         /* Set basic styling for the body */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 0 1rem;
+            background-image: url(https://images.unsplash.com/photo-1729525589450-aa9e4e83d94e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-color);
         }
 
         /* Style the header */
         header {
-            background: #333;
-            color: #fff;
+            background-color: rgba(26, 26, 26, 0.8);
             padding: 1rem;
             text-align: center;
             position: relative;
         }
 
-        /* Style the home button */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        /* Home Button Styling */
         .home-button {
             position: absolute;
             top: 1rem;
             right: 1rem;
             padding: 0.5rem 1rem;
-            background: #555;
-            color: #fff;
+            background: var(--secondary-color);
+            color: var(--text-color);
             text-decoration: none;
             border-radius: 4px;
         }
 
         .home-button:hover {
-            background: #666;
+            background: var(--accent-color);
         }
 
         /* Style the main section */
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 2rem;
         }
 
-        /* Style the artist details section */
+        /* Artist details styling */
         .artist-details {
-            background: #fff;
-            padding: 1.5rem;
+            background-color: rgba(26, 26, 26, 0.8);
+            padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
         }
 
         .artist-details img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .artist-details p {
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
-        /* Style the table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
+        /* Flexbox styling for tour dates */
+        .tour-dates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        th, td {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            text-align: left;
+        .tour-date {
+            flex: 1 1 calc(33.33% - 1rem);
+            background-color: var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
         }
 
-        th {
-            background: #f4f4f4;
+        .tour-date h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
-        tr:nth-child(even) {
-            background: #f9f9f9;
+        .tour-date p {
+            font-size: 1.2rem;
+        }
+
+        /* Adjust for small screens */
+        @media (max-width: 768px) {
+            .tour-date {
+                flex: 1 1 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tour-date {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
@@ -107,26 +143,18 @@
             <p>Creation Date: {{.CreationDate}}</p>
             <p>First Album: {{.FirstAlbum}}</p>
 
-            <!-- Tour dates and locations -->
+            <!-- Tour dates and locations using flexbox -->
             <h2>Tour Dates & Locations</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{range $location, $dates := .Relations}}
+            <div class="tour-dates">
+                {{range $location, $dates := .Relations}}
                     {{range $date := $dates}}
-                    <tr>
-                        <td>{{$location}}</td>
-                        <td>{{$date}}</td>
-                    </tr>
+                    <div class="tour-date">
+                        <h3>{{$location}}</h3>
+                        <p>{{$date}}</p>
+                    </div>
                     {{end}}
-                    {{end}}
-                </tbody>
-            </table>
+                {{end}}
+            </div>
         </div>
     </main>
 </body>
