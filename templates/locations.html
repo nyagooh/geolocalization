@@ -12,122 +12,406 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-color: #1A1A1A;
+            --primary-color: #2A1B3D;
+            --secondary-color: #9232A9;
+            --accent-color: #8A4FFF;
+            --text-color: #FFFFFF;
+        }
+
         /* Set basic styling for the body */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
+            background-image: url(https://images.unsplash.com/photo-1729525589450-aa9e4e83d94e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-color);
         }
 
-        /* Style the header */
         header {
-            background: #333;
-            color: #fff;
+            background-color: rgba(26, 26, 26, 0.8);
             padding: 1rem 0;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header h1 {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Style the navigation bar */
-        .navbar ul {
-            list-style: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        .navbar li {
-            display: inline;
-            margin: 0 1rem;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-
-        /* Style the main section */
-        main {
-            padding: 1rem;
+        .container {
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        main h2 {
-            margin-bottom: 1rem;
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Style the table */
-        table {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .styled-image {
+        width: 50px;  
+        border-radius: 30%; 
+        object-fit: cover;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 1001;
+    }
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
             width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        th, td {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            text-align: left;
+        .navbar a:hover {
+            color: var(--accent-color);
         }
 
-        th {
-            background: #f4f4f4;
+        .navbar a:hover::after {
+            transform: scaleX(1);
         }
 
-        tr:nth-child(even) {
-            background: #f9f9f9;
+
+/* Hide the dropdown by default */
+.navbar .dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(26, 26, 26, 0.9);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar .dropdown a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Display dropdown menu on toggle */
+.navbar.active .dropdown {
+    display: flex;
+}
+.hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
         }
 
-        ul {
-            padding-left: 1.5rem;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 2rem;
         }
+
+        .search-container {
+            margin-bottom: 3rem;
+        }
+
+        .search-container form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-container input[type="text"] {
+            flex-grow: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-container input[type="submit"] {
+            padding: 1rem 3rem;
+            border: none;
+            background: var(--accent-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container input[type="submit"]:hover {
+            background: var(--secondary-color);
+        }
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: -60px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .artist-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .artist {
+            background-color: var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color);
+            flex: 1 1 calc(33.33% - 1rem);
+        }
+
+        .artist:hover {
+            transform: translateY(-10px);
+        }
+
+        .dates {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .dates li {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+     
+footer {
+    background-color:rgba(26, 26, 26, 0.8); /* Dark background color */
+    color: #fff; /* White text color */
+    padding: 20px;
+    text-align: center;
+}
+
+footer.container {
+    display: flex;
+    justify-content: space-between; /* Space out logo and links */
+    align-items: center; /* Center items vertically */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.styled-image {
+    width: 50px;  
+    border-radius: 30%; 
+    object-fit: cover;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.footer-links ul {
+    list-style-type: none; /* Remove bullet points */
+    display: flex; /* Use flexbox for horizontal layout */
+    gap: 20px; /* Space between links */
+    justify-content: center;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-links a:hover::after {
+    transform: scaleX(1);
+}
+
+.social-media {
+    margin-top: 15px; /* Space above social media icons */
+}
+
+.social-media img {
+    width: 30px; /* Adjust icon size */
+    margin-right: 10px; /* Space between icons */
+}
+
+.collaborators {
+    margin-top: 15px; /* Space above collaborators' images */
+}
+
+.collab-img {
+    width: 40px; /* Size of collaborator images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make images circular */
+}
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .artist {
+                flex: 1 1 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .artist {
+                flex: 1 1 100%;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <h1>Tour Locations</h1>
-        <!-- Navigation bar -->
-        <nav class="navbar">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/dates">Dates</a></li>
-                <li><a href="/locations">Locations</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
+                <span>Groupie Tracker</span>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+    <div class="hero">
+        <div class="container">
+            <h1>Discover Locations Of Your Favorite Artists</h1>
+            <div class="search-container">
+                <form action="/search" method="GET">
+                    <input type="text" name="query" placeholder="Search dates...">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
+    </div>
     <main>
-        <h2>Location Details</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Artist Name</th>
-                    <th>Locations</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{range .Index}}
-                <tr>
-                    <td>{{.Name}}</td>
-                    <td>
-                        <ul>
-                            {{range .Locations}}
-                            <li>{{.}}</li>
-                            {{end}}
-                        </ul>
-                    </td>
-                </tr>
-                {{end}}
-            </tbody>
-        </table>
+        <div class="artist-list">
+            {{range .Index}}
+            <div class="artist">
+                <h2>{{.Name}}</h2>
+                <ul class="dates">
+                    {{range .Locations}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+            {{end}}
+        </div>
     </main>
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
+                <span>Groupie Tracker</span>
+            </div>
+            <nav class="footer-links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="social-media">
+            <a href="https://github.com/nyagooh" target="_blank" rel="noopener noreferrer">
+                <img src="path/to/github-icon.png" alt="GitHub" />
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                <img src="path/to/linkedin-icon.png" alt="LinkedIn" />
+            </a>
+        </div>
+
+        <div class="collaborators">
+            <img src="path/to/collaborator1.jpg" alt="Collaborator 1" class="collab-img" />
+            <img src="path/to/collaborator2.jpg" alt="Collaborator 2" class="collab-img" />
+            <img src="path/to/collaborator3.jpg" alt="Collaborator 3" class="collab-img" />
+        </div>
+    </footer>
 </body>
 </html>
