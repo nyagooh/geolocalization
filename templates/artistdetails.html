@@ -32,14 +32,111 @@
             color: var(--text-color);
         }
 
-        /* Style the header */
         header {
             background-color: rgba(26, 26, 26, 0.8);
-            padding: 1rem;
-            text-align: center;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .styled-image {
+        width: 50px;  
+        border-radius: 30%; 
+        object-fit: cover;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 1001;
+    }
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
             position: relative;
         }
 
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar a:hover::after {
+            transform: scaleX(1);
+        }
+
+
+/* Hide the dropdown by default */
+.navbar .dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(26, 26, 26, 0.9);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar .dropdown a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Display dropdown menu on toggle */
+.navbar.active .dropdown {
+    display: flex;
+}
         h1 {
             font-size: 2rem;
             font-weight: 700;
@@ -115,6 +212,92 @@
         .tour-date p {
             font-size: 1.2rem;
         }
+             
+footer {
+    background-color:rgba(26, 26, 26, 0.8); /* Dark background color */
+    color: #fff; /* White text color */
+    padding: 20px;
+    text-align: center;
+}
+
+footer.container {
+    display: flex;
+    justify-content: space-between; /* Space out logo and links */
+    align-items: center; /* Center items vertically */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.styled-image {
+    width: 50px;  
+    border-radius: 30%; 
+    object-fit: cover;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.footer-links ul {
+    list-style-type: none; /* Remove bullet points */
+    display: flex; /* Use flexbox for horizontal layout */
+    gap: 20px; /* Space between links */
+    justify-content: center;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-links a:hover::after {
+    transform: scaleX(1);
+}
+
+.social-media {
+    margin-top: 15px; /* Space above social media icons */
+}
+
+.social-media img {
+    width: 30px; /* Adjust icon size */
+    margin-right: 10px; /* Space between icons */
+}
+
+.collaborators {
+    margin-top: 15px; /* Space above collaborators' images */
+}
+
+.collab-img {
+    width: 40px; /* Size of collaborator images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make images circular */
+}
 
         /* Adjust for small screens */
         @media (max-width: 768px) {
@@ -132,9 +315,19 @@
 </head>
 <body>
     <header>
-        <h1>{{.Name}}</h1>
-        <!-- Home Button -->
-        <a href="/" class="home-button">Home</a>
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
+                <span>Groupie Tracker</span>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <div class="artist-details">
@@ -157,5 +350,35 @@
             </div>
         </div>
     </main>
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
+                <span>Groupie Tracker</span>
+            </div>
+            <nav class="footer-links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="social-media">
+            <a href="https://github.com/nyagooh" target="_blank" rel="noopener noreferrer">
+                <img src="path/to/github-icon.png" alt="GitHub" />
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                <img src="path/to/linkedin-icon.png" alt="LinkedIn" />
+            </a>
+        </div>
+
+        <div class="collaborators">
+            <img src="path/to/collaborator1.jpg" alt="Collaborator 1" class="collab-img" />
+            <img src="path/to/collaborator2.jpg" alt="Collaborator 2" class="collab-img" />
+            <img src="path/to/collaborator3.jpg" alt="Collaborator 3" class="collab-img" />
+        </div>
+    </footer>
 </body>
 </html>
