@@ -12,125 +12,292 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-color: #1A1A1A;
+            --primary-color: #2A1B3D;
+            --secondary-color: #9232A9;
+            --accent-color: #8A4FFF;
+            --text-color: #FFFFFF;
+        }
         /* Set basic styling for the body */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
+            background-image: url(https://images.unsplash.com/photo-1729525589450-aa9e4e83d94e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+
         }
 
         /* Style the header */
         header {
-            background: #333;
-            color: #fff;
+            background-color: rgba(26, 26, 26, 0.8);
             padding: 1rem 0;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        /* Style the navigation bar */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .styled-image {
+        width: 50px;  
+        border-radius: 30%; 
+        object-fit: cover;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--text-color);
+        cursor: pointer;
+        z-index: 1001;
+    }
         .navbar ul {
-            list-style: none;
-            padding: 0;
-            text-align: center;
-        }
-
-        .navbar li {
-            display: inline;
-            margin: 0 1rem;
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
         }
 
         .navbar a {
-            color: #fff;
+            color: var(--text-color);
             text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .navbar a:hover {
-            text-decoration: underline;
+            color: var(--accent-color);
         }
 
-        /* Style the main section */
+        .navbar a:hover::after {
+            transform: scaleX(1);
+        }
+
+
+/* Hide the dropdown by default */
+.navbar .dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(26, 26, 26, 0.9);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar .dropdown a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Display dropdown menu on toggle */
+.navbar.active .dropdown {
+    display: flex;
+}
+.hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-container form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-container input[type="text"] {
+            flex-grow: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-container input[type="submit"] {
+            padding: 1rem 3rem;
+            border: none;
+            background: var(--accent-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container input[type="submit"]:hover {
+            background: var(--secondary-color);
+        }
+
         main {
             padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
+.artist-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
 
-        main h2 {
-            margin-bottom: 1rem;
-        }
+.artist {
+    flex: 1 1 calc(33.33% - 1rem);
+    background-color: var(--primary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    overflow: hidden; 
+    color: var(--text-color);
+}
 
-        /* Style the table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
-        }
 
-        th, td {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
+.artist:hover {
+    transform: translateY(-10px);
+}
 
-        th {
-            background: #f4f4f4;
-        }
+h2 {
+    font-size: 2rem;  /* Make the artist's name larger */
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;  /* Optional: Capitalizes each word */
+}
 
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
+.dates {
+    list-style-type: none;
+    padding-left: 0;
+}
 
-        /* Style the unordered list */
-        ul {
-            padding-left: 1.5rem;
-            margin: 0;
-        }
+.dates li {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
 
-        /* Style list items */
-        li {
-            margin-bottom: 0.5rem;
-        }
+@media (max-width: 768px) {
+    .artist {
+        flex: 1 1 calc(50% - 1rem);  /* 2 items per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .artist {
+        flex: 1 1 100%;  /* 1 item per row on small screens */
+    }
+}
+
+
     </style>
 </head>
 <body>
     <header>
-        <h1>Tour Dates</h1>
-        <!-- Navigation bar -->
-        <nav class="navbar">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/dates">Dates</a></li>
-                <li><a href="/locations">Locations</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.pinimg.com/736x/95/39/d9/9539d979930342b936b9942d4f9fc484.jpg" class="styled-image">
+                <span>Groupie Tracker</span>
+                <button class="hamburger" aria-label="Toggle navigation">
+                    ☰
+                </button>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/Home">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/dates">Dates</a></li>
+                    <li><a href="/locations">Locations</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+    <div class="hero">
+        <div class="container">
+            <h1>Discover Dates Of Your Favorite Artists</h1>
+            <div class="search-container">
+                <form action="/search" method="GET">
+                    <input type="text" name="query" placeholder="Search dates...">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
+    </div>
     <main>
-        <h2>Tour Dates Details</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Artist Name</th>
-                    <th>Dates</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{range .Index}}
-                <tr>
-                    <td>{{.Name}}</td>
-                    <td>
-                        <ul>
-                            {{range .Dates}}
-                            <li>{{.}}</li>
-                            {{end}}
-                        </ul>
-                    </td>
-                </tr>
-                {{end}}
-            </tbody>
-        </table>
+        <div class="artist-list">
+            {{range .Index}}
+            <div class="artist">
+                <h2>{{.Name}}</h2>
+                <ul class="dates">
+                    {{range .Dates}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+            {{end}}
+        </div>
     </main>
+    
 </body>
 </html>
