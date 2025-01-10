@@ -375,26 +375,28 @@ footer.container {
             display: block;
         }
 
-        .navbar {
-            display: none; /* Initially hide the navbar */
+        .navbar ul {
+            display: none;
             flex-direction: column;
-            background-color: var(--bg-color);
+            background-color: rgba(26, 26, 26, 0.9);
             position: absolute;
-            top: 100%;
+            top: 60px;
             right: 0;
             width: 100%;
             z-index: 1000;
         }
 
-        .navbar ul {
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+        .navbar ul.show {
+            display: flex;
         }
 
-        .navbar.active {
-            display: flex; /* Show navbar when active */
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
         }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -539,7 +541,16 @@ footer.container {
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.navbar ul');
+
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+        });
+    </script>
 </body>
 
 </html>
-
