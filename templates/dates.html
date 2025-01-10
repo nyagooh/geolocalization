@@ -212,8 +212,7 @@
     background-color: var(--primary-color);
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px var(--accent-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     overflow: hidden;
     color: var(--text-color);
     flex: 1 1 calc(33.33% - 1rem); /* Keep the existing layout size */
@@ -240,6 +239,21 @@ h2 {
     margin: 0.5rem 0;
     font-size: 1.1rem;
     color: var(--text-color);
+}
+
+.date {
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: transparent;
+    padding: 0.2rem 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0.8rem 0;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.date:hover {
+    color: var(--accent-color);
 }
 
 footer {
@@ -340,7 +354,30 @@ footer.container {
     }
 }
 
+        /* Small screen styling */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(26, 26, 26, 0.9);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                z-index: 1000;
+            }
 
+            .navbar ul.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: var(--text-color);
+            }
+        }
     </style>
 </head>
 <body>
@@ -381,7 +418,7 @@ footer.container {
                 <h2>{{.Name}}</h2>
                 <ul class="dates">
                     {{range .Dates}}
-                    <li>{{.}}</li>
+                    <li class="date">{{.}}</li>
                     {{end}}
                 </ul>
             </div>
@@ -418,5 +455,15 @@ footer.container {
             <img src="path/to/collaborator3.jpg" alt="Collaborator 3" class="collab-img" />
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.navbar ul');
+
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+        });
+    </script>
 </body>
 </html>
