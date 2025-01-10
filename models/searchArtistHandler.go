@@ -11,7 +11,12 @@ import (
 
 // Add function that fetch data,process search query and renders result to index.html
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query().Get("query")
+
+
+	query := r.URL.Query().Get("query")// accepting user input
+
+
+
 	artists, err := services.FetchAndUnmarshalArtists()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
