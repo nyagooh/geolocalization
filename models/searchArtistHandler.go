@@ -9,7 +9,7 @@ import (
 	"groupie/services"
 )
 
-// SearchHandler handles the search functionality
+// Add function that fetch data,process search query and renders result to index.html
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("query")
 	artists, err := services.FetchAndUnmarshalArtists()
