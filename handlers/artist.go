@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -127,4 +128,42 @@ func FetchAndUnmarshalArtists() ([]Artist, error) {
 	}
 
 	return artists, nil
+}
+
+// SearchHandler handles search queries and returns matching results
+func SearchHandler(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("q")
+	query = strings.ToLower(query)
+
+	artists, err := FetchAndUnmarshalArtists()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var results []map[string]string
+	for _, artist := range artists {
+		if strings.Contains(strings.ToLower(artist.Name), query) {
+			results = append(results, map[string]string{"name": artist.Name, "type": "artist/band"})
+		}
+		for _, member := range artist.Members {
+			if strings.Contains(strings.ToLower(member), query) {
+				results = append(results, map[string]string{"name": member, "type": "member"})
+			}
+		}
+		if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
+			results = append(results, map[string]string{"name": artist.FirstAlbum, "type": "first album"})
+		}
+		if strings.Contains(fmt.Sprint(artist.CreationDate), query) {
+			results = append(results, map[string]string{"name": fmt.Sprint(artist.CreationDate), "type": "creation date"})
+		}
+		for _, location := range artist.Locations {
+			if strings.Contains(strings.ToLower(location), query) {
+				results = append(results, map[string]string{"name": location, "type": "location"})
+			}
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(results)
 }

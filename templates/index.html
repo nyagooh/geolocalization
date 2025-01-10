@@ -171,6 +171,10 @@
 
         .search-container {
             margin-bottom: 3rem;
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .search-container form {
@@ -180,6 +184,14 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50px;
             overflow: hidden;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
         }
 
         .search-container input[type="text"] {
@@ -204,6 +216,30 @@
 
         .search-container input[type="submit"]:hover {
             background: var(--secondary-color);
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .suggestion-item {
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
         }
 
         main {
@@ -466,7 +502,8 @@ footer.container {
             <h1>Discover Your Favorite Artists</h1>
             <div class="search-container">
                 <form action="/search" method="GET">
-                    <input type="text" name="query" placeholder="Search artists, bands, or genres...">
+                    <input type="text" name="query" class="search-input" placeholder="Search artists, bands, or genres...">
+                    <div class="suggestions"></div>
                     <input type="submit" value="Search">
                 </form>
             </div>
@@ -548,6 +585,27 @@ footer.container {
 
             hamburger.addEventListener('click', function() {
                 navMenu.classList.toggle('show');
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            const suggestionsContainer = document.querySelector('.suggestions');
+
+            searchInput.addEventListener('input', function() {
+                const query = searchInput.value.toLowerCase();
+                fetch(`/search?q=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        suggestionsContainer.innerHTML = '';
+                        data.forEach(item => {
+                            const suggestionItem = document.createElement('div');
+                            suggestionItem.classList.add('suggestion-item');
+                            suggestionItem.textContent = `${item.name} - ${item.type}`;
+                            suggestionsContainer.appendChild(suggestionItem);
+                        });
+                    });
             });
         });
     </script>
