@@ -167,7 +167,7 @@
             overflow: hidden;
         }
 
-        .search-container input[type="text"] {
+        .search-container input[type="date"] {
             flex-grow: 1;
             padding: 1rem 1.5rem;
             border: none;
@@ -404,8 +404,8 @@ footer.container {
         <div class="container">
             <h1>Discover Dates Of Your Favorite Artists</h1>
             <div class="search-container">
-                <form action="/search" method="GET">
-                    <input type="text" name="query" placeholder="Search dates...">
+                <form action="/searchDate" method="GET">
+                    <input type="date" name="query" placeholder="Search dates...">
                     <input type="submit" value="Search">
                 </form>
             </div>
