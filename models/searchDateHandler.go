@@ -52,4 +52,7 @@ func SearchDatesHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
+func formatDateInput(s string) string {
+	splitDate := strings.Split(s, "-")
+	return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+}
