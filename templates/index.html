@@ -512,13 +512,17 @@ footer.container {
     <main>
         <div class="container">
             <section id="artists">
-                {{range .}}
-                <a href="/artist/{{.ID}}" class="artist-link">
-                    <div class="artist">
-                        <img src="{{.Image}}" alt="{{.Name}}">
-                        <h2>{{.Name}}</h2>
-                    </div>
-                </a>
+                {{if .}}
+                    {{range .}}
+                        <a href="/artist/{{.ID}}" class="artist-link">
+                            <div class="artist">
+                                <img src="{{.Image}}" alt="{{.Name}}">
+                                <h2>{{.Name}}</h2>
+                            </div>
+                        </a>
+                    {{end}}
+                {{else}}
+                    <p>No artist(s) found.</p>
                 {{end}}
             </section>
         </div>
