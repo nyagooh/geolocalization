@@ -17,6 +17,7 @@ func main() {
 
 	http.HandleFunc("/search", models.SearchHandler)
 	http.HandleFunc("/searchLocation", models.SearchLocationHandler)
+	http.HandleFunc("/searchDate", models.SearchDatesHandler)
 	fmt.Println("Server is starting...")
 	fmt.Println("Go on http://localhost:8080/")
 	fmt.Println("To shut down the server press CTRL + C")
