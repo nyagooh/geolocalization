@@ -36,9 +36,9 @@ This is a subproject of the main Groupie Tracker project:
 [https://learn.zone01kisumu.ke/git/kevwasonga/groupie-tracker](https://learn.zone01kisumu.ke/git/kevwasonga/groupie-tracker)
 
 ## Collaborators
-- **Nyagooh Maina**
-- **Kevin Wasonga**
-- **Granton Onyango**
+- [**Nyagooh Maina**](https://www.linkedin.com/in/maina-anne-37797820b/)
+- [**Kevin Wasonga**](https://www.linkedin.com/in/kevin-wasonga-3a9050317/)
+- [**Granton Onyango**](https://www.linkedin.com/in/granton-onyango-298ba6213/)
 
 ## Usage
 1. **Clone the Repository**:
