@@ -13,27 +13,27 @@ import (
 
 func main() {
 	// Example usage.............to test filtering or artists according to given parameters
-	criteria := services.FilterCriteria{
-		CreationDateFrom: 1990,
-		CreationDateTo:   2009,
+	// criteria := services.FilterCriteria{
+	// 	CreationDateFrom: 1990,
+	// 	CreationDateTo:   2009,
 
-		FirstAlbumFrom:    "1973-01-01",
-		FirstAlbumTo:      "2009-02-02",
-		MemberCount:       4,
-		LocationSubstring: "london-uk",
-	}
+	// 	FirstAlbumFrom:    "1973-01-01",
+	// 	FirstAlbumTo:      "2009-02-02",
+	// 	MemberCount:       4,
+	// 	LocationSubstring: "london-uk",
+	// }
 
 	// Fetch artists (assuming your FetchAndUnmarshalArtists function is working correctly)
-	artists, err := services.FetchAndUnmarshalArtists()
-	if err != nil {
-		log.Fatalf("Error fetching artists: %v", err)
-	}
+	// artists, err := services.FetchAndUnmarshalArtists()
+	// if err != nil {
+	// 	log.Fatalf("Error fetching artists: %v", err)
+	// }
 
 	// Call the filter function with the sample criteria and artists
-	filteredArtists, _ := services.FilterArtists(artists, criteria)
+	// filteredArtists, _ := services.FilterArtists(artists, criteria)
 
 	// Print the filtered artists
-	fmt.Println("Filtered Artists:", filteredArtists)
+	// fmt.Println("Filtered Artists:", filteredArtists)
 	//................
 	// Serve static files
 	staticDir := filepath.Join(".", "static")
@@ -52,7 +52,7 @@ func main() {
 	//http.HandleFunc("/searchMap", models.SearchMapHandler)
 
 	http.HandleFunc("/searchDate", models.SearchDatesHandler)
-	http.HandleFunc("/filter", models.FilteredArtistsHandler)
+	// http.HandleFunc("/filter", models.FilteredArtistsHandler)
 
 	fmt.Println("Server is starting...")
 	fmt.Println("Go on http://localhost:8080/")
